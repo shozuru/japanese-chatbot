@@ -4,7 +4,7 @@ An interactive chatbot that helps users learn Japanese through free-form transla
 # Features
 * Free-form translation: Ask "how do you say dog in Japanese?"
 * Grammar correction: Type "Can you fix this sentence", provide the sentence (e.g. 東京に行きたいだ) and the bot suggests corrections (e.g. 東京に行きたい)
-* Conversation Mode: Type "let's have a conversation" for practice speaking in conversations.
+* Conversation Mode: Type "let's have a conversation" for  speaking practice.
 
 # Tech Stack
 Frontend:
