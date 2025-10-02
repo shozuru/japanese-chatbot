@@ -28,5 +28,16 @@ cd japanese-chatbot
 ```
 
 # Installing backend
+```
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
 
 # Installing frontend
+```
+cd frontend
+npm install
+npm run build
+npm run preview
+```
