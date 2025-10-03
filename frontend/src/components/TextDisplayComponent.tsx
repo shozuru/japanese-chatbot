@@ -9,7 +9,7 @@ enum Sender {
 
 enum Intent {
     VOCAB = "vocab_practice",
-    GRAMMER = "grammar_practice",
+    GRAMMAR = "grammar_practice",
     CHAT = "conversation_practice",
     HELP = "help",
     TRANSLATION = "translation"
@@ -55,7 +55,7 @@ const TextDisplayComponent: React.FC = () => {
     }
 
     const handleSendTobackend = async (inputText: string) => {
-        if (intent === Intent.GRAMMER) {
+        if (intent === Intent.GRAMMAR) {
             axios.post('http://127.0.0.1:8000/grammar',
                 {
                     message: inputText
