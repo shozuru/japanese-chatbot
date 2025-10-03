@@ -39,7 +39,7 @@ async def generateResponse(inputText: ChatText) -> dict[str, str]:
     return {"response": botResponse}
 
 @app.post('/answer')
-async def check_vocab_answer(inputText: VocabData) -> dict[str, str|int]:
+async def check_vocab_answer(inputText: VocabData) -> dict[str, str]:
     if not inputText:
         raise HTTPException(status_code=400,
                             detail="Input message cannot be empty")
@@ -51,7 +51,7 @@ async def check_vocab_answer(inputText: VocabData) -> dict[str, str|int]:
 
 
 @app.post('/grammar')
-async def correct_sentence(inputText: ChatText) -> dict[str, str|int]:
+async def correct_sentence(inputText: ChatText) -> dict[str, str]:
     if not inputText:
         raise HTTPException(status_code=400,
                             detail="Input message cannot be empty")
@@ -72,7 +72,9 @@ async def correct_sentence(inputText: ChatText) -> dict[str, str|int]:
     return response
 
 @app.post('/chat')
-async def chat_response(inputText: ChatText) -> dict[str, str|int]:
+async def chat_response(inputText: ChatText) -> \
+            dict[str, str|IntentClassification.Intent]:
+    
     if not inputText:
         raise HTTPException(status_code=400, 
                             detail="Input message cannot be empty")
@@ -95,7 +97,7 @@ async def chat_response(inputText: ChatText) -> dict[str, str|int]:
         message: str = "Please enter the sentence you want corrected."
 
         response = {
-            "intent": intent.value,
+            "intent": intent,
             "response": message
         }
     
@@ -104,7 +106,7 @@ async def chat_response(inputText: ChatText) -> dict[str, str|int]:
         message: str = "Okay, let's practice having a conversation!"
 
         response = {
-            "intent": intent.value,
+            "intent": intent,
             "response": message
         }
         
@@ -122,19 +124,19 @@ async def chat_response(inputText: ChatText) -> dict[str, str|int]:
                 Translation.translateSentence(match.group(1))
         
             response = {
-                "intent": intent.value,
+                "intent": intent,
                 "response": translatedSentece
             }
         else:
             response = {
-                "intent": intent.value,
+                "intent": intent,
                 "response": "Could not get translation."
             }
 
     else:
         responseMessage = IntentClassification.generate_response(intent)
         response = {
-            "intent": intent.value,
+            "intent": intent,
             "response": responseMessage
             }
         
