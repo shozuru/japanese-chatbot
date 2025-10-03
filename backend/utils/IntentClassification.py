@@ -1,19 +1,20 @@
-from enum import Enum
+from enum import Enum, auto
 
 class Intent(Enum):
     # VOCAB = "vocab_practice"
-    GRAMMER = "grammar_practice"
-    CHAT = "conversation_practice"
-    HELP = "help"
-    TRANSLATION = "translation"
+    GRAMMAR = 0
+    CHAT = auto()
+    HELP = auto()
+    TRANSLATION = auto()
 
 def classify_intent(message: str) -> Intent:
     lowerCaseMessage: str = message.lower()
 
     # if "vocab" in lowerCaseMessage:
     #     return Intent.VOCAB
-    if "grammar" in lowerCaseMessage or "correct" in lowerCaseMessage:
-        return Intent.GRAMMER
+    if "grammar" in lowerCaseMessage or "correct" in lowerCaseMessage \
+            or "fix" in lowerCaseMessage:
+        return Intent.GRAMMAR
     elif "chat" in lowerCaseMessage or "talk" in lowerCaseMessage or \
         "speak" in lowerCaseMessage or "convers" in lowerCaseMessage:
         return Intent.CHAT

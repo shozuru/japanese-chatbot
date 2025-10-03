@@ -39,7 +39,7 @@ async def generateResponse(inputText: ChatText) -> dict[str, str]:
     return {"response": botResponse}
 
 @app.post('/answer')
-async def check_vocab_answer(inputText: VocabData) -> dict[str, str]:
+async def check_vocab_answer(inputText: VocabData) -> dict[str, str|int]:
     if not inputText:
         raise HTTPException(status_code=400,
                             detail="Input message cannot be empty")
@@ -51,7 +51,7 @@ async def check_vocab_answer(inputText: VocabData) -> dict[str, str]:
 
 
 @app.post('/grammar')
-async def correct_sentence(inputText: ChatText) -> dict[str, str]:
+async def correct_sentence(inputText: ChatText) -> dict[str, str|int]:
     if not inputText:
         raise HTTPException(status_code=400,
                             detail="Input message cannot be empty")
@@ -72,7 +72,7 @@ async def correct_sentence(inputText: ChatText) -> dict[str, str]:
     return response
 
 @app.post('/chat')
-async def chat_response(inputText: ChatText) -> dict[str, str]:
+async def chat_response(inputText: ChatText) -> dict[str, str|int]:
     if not inputText:
         raise HTTPException(status_code=400, 
                             detail="Input message cannot be empty")
@@ -91,7 +91,7 @@ async def chat_response(inputText: ChatText) -> dict[str, str]:
     #             "response": question
     #             }
     
-    if intent == IntentClassification.Intent.GRAMMER:
+    if intent == IntentClassification.Intent.GRAMMAR:
         message: str = "Please enter the sentence you want corrected."
 
         response = {
@@ -100,6 +100,7 @@ async def chat_response(inputText: ChatText) -> dict[str, str]:
         }
     
     elif intent == IntentClassification.Intent.CHAT:
+        print("the intent is to have a conversation")
         message: str = "Okay, let's practice having a conversation!"
 
         response = {
