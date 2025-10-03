@@ -8,11 +8,10 @@ enum Sender {
 }
 
 enum Intent {
-    VOCAB = "vocab_practice",
-    GRAMMAR = "grammar_practice",
-    CHAT = "conversation_practice",
-    HELP = "help",
-    TRANSLATION = "translation"
+    GRAMMAR,
+    CHAT,
+    HELP,
+    TRANSLATION
 }
 
 interface ChatMessage {
@@ -26,7 +25,7 @@ const TextDisplayComponent: React.FC = () => {
     const [responseText, setResponseText] = useState<string>('')
     const [chatMessageList, setChatMessageList] = useState<ChatMessage[]>([])
     const [currentVocabWord, setCurrentVocabWord] = useState<string>('')
-    const [intent, setIntent] = useState<string>('')
+    const [intent, setIntent] = useState<Intent | null>(null)
 
     const bottomRef = useRef<HTMLDivElement | null>(null)
 
@@ -65,13 +64,13 @@ const TextDisplayComponent: React.FC = () => {
                     setResponseText(res.data.response)
                 })
 
-            setIntent('')
+            setIntent(null)
 
         } else if (intent === Intent.CHAT && inputText == 'STOP') {
             axios.post('http://127.0.0.1:8000/stopConvo')
                 .then(res => {
                     setResponseText(res.data.response)
-                    setIntent('')
+                    setIntent(null)
                 })
 
         } else if (intent === Intent.CHAT) {
