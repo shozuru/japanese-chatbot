@@ -55,7 +55,7 @@ const TextDisplayComponent: React.FC = () => {
 
     const handleSendTobackend = async (inputText: string) => {
         if (intent === Intent.GRAMMAR) {
-            axios.post('http://127.0.0.1:8000/grammar',
+            axios.post('https://japanese-chatbot.duckdns.org/grammar',
                 {
                     message: inputText
                 }
@@ -67,14 +67,14 @@ const TextDisplayComponent: React.FC = () => {
             setIntent(null)
 
         } else if (intent === Intent.CHAT && inputText == 'STOP') {
-            axios.post('http://127.0.0.1:8000/stopConvo')
+            axios.post('https://japanese-chatbot.duckdns.org/stopConvo')
                 .then(res => {
                     setResponseText(res.data.response)
                     setIntent(null)
                 })
 
         } else if (intent === Intent.CHAT) {
-            axios.post('http://127.0.0.1:8000/conversation',
+            axios.post('https://japanese-chatbot.duckdns.org/conversation',
                 {
                     message: inputText
                 }
@@ -84,7 +84,7 @@ const TextDisplayComponent: React.FC = () => {
                 })
 
         } else if (currentVocabWord.trim()) {
-            axios.post('http://127.0.0.1:8000/answer',
+            axios.post('https://japanese-chatbot.duckdns.org/answer',
                 {
                     vocab: currentVocabWord,
                     guess: inputText
@@ -100,7 +100,7 @@ const TextDisplayComponent: React.FC = () => {
                 })
 
         } else {
-            axios.post('http://127.0.0.1:8000/chat',
+            axios.post('https://japanese-chatbot.duckdns.org/chat',
                 {
                     message: inputText
                 }
